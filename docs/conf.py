@@ -24,6 +24,7 @@ extensions = [
     "sphinx.ext.napoleon",
     "nbsphinx",
     "sphinx.ext.mathjax",
+    "sphinx.ext.githubpages",
 ]
 
 templates_path = ["_templates"]
