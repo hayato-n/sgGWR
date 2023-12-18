@@ -1,23 +1,24 @@
 [project]
 name = "sgGWR"
-authors = [{name = "Hayato Nishi", email = ""}]
+authors = [{name = "Hayato Nishi", email = "hnishiua@gmail.com"}]
 version = "0.1.0"
 requires-python = ">=3.11"
+readme = "README.md"
 dependencies = [
-    "tqdm~=4.60.0",
-    "scipy~=1.6.2",
-    "numpy~=1.19.2",
-]
-optional-dependencies =[
-    "optax~=0.0.9",
-    "jax~=0.2.12",
+    "tqdm>=4.60.0",
+    "scipy>=1.6.2",
+    "numpy>=1.19.2",
 ]
 
 [project.optional-dependencies]
-dev = [
-    "pytest"
+jax = [
+    "optax>=0.0.9",
+    "jax>=0.2.12"
 ]
-
+dev = [
+    "build",
+    "twine",
+]
 
 [project.urls]
 "Homepage" = "https://github.com/hayato-n/sgGWR"
