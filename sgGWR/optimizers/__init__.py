@@ -1,3 +1,5 @@
+from .. import models, kernels
+
 try:
     from .existings import optax_optimizer, scipy_optimizer, scipy_L_BFGS_B
     from .sg import SGD, ASGD, SGDarmijo, Adam, Yogi
@@ -22,8 +24,8 @@ try:
     ]
 
 except:
-    from .sg_numpy import SGD, ASGD, SGDarmijo
     from .existings_numpy import scipy_optimizer, scipy_L_BFGS_B
+    from .sg_numpy import SGD, ASGD, SGDarmijo
 
     print(
         "JAX is not available. Installing JAX is strongly recommended for performance."
@@ -36,4 +38,3 @@ except:
         "scipy_optimzer",
         "scipy_L_BFGS_B",
     ]
-
