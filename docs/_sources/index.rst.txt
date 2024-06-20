@@ -34,8 +34,7 @@ Reference
 
 Please cite the following article:
 
-- Hayato Nishi, & Yasushi Asami (2023). "Stochastic gradient geographical weighted regression (sgGWR): Scalable bandwidth optimization for geographically weighted regression. International Journal of Geographical Information Science", Latest Articles. https://doi.org/10.1080/13658816.2023.2285471
-
+- Nishi, H., & Asami, Y. (2024). Stochastic gradient geographical weighted regression (sgGWR): Scalable bandwidth optimization for geographically weighted regression. International Journal of Geographical Information Science, 38(2), 354–380. https://doi.org/10.1080/13658816.2023.2285471
 
 
 .. toctree::
@@ -43,6 +42,7 @@ Please cite the following article:
    :caption: Tutorials:
 
    examples/introduction.ipynb
+   examples/init_bandwidth.ipynb
 
 .. toctree::
    :maxdepth: 2

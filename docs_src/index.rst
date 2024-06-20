@@ -42,6 +42,7 @@ Please cite the following article:
    :caption: Tutorials:
 
    examples/introduction.ipynb
+   examples/init_bandwidth.ipynb
 
 .. toctree::
    :maxdepth: 2

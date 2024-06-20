@@ -22,6 +22,8 @@ except:
 from . import kernels
 
 from scipy import stats
+from tqdm.auto import tqdm
+import copy
 
 
 class GWR_Ridge(object):
@@ -538,3 +540,102 @@ class ScaGWR(GWR):
         r = a * m0 + jnp.sum(b[:, None, None] * m, axis=0)
 
         return (r, R), (m, M), (m0, M0)
+
+
+class MGWR(GWR_Ridge):
+    def __init__(
+        self,
+        y,
+        X,
+        sites,
+        kernel=kernels.Gaussian([1]),
+        base_class=GWR_Ridge,
+        base_class_params=dict(),
+    ):
+        super().__init__(y, X, sites)
+
+        if isinstance(kernel, kernels._baseKernel):
+            self.kernel = [copy.deepcopy(kernel)] * self.D
+        else:
+            self.kernel = kernel
+            if len(self.kernel) != self.D:
+                raise ValueError("kernel should be the iterable object of length D")
+
+        if base_class in (GWR_Ridge, GWR, ScaGWR):
+            self.base_class = [base_class] * self.D
+        else:
+            self.base_class = base_class
+            if len(self.base_class) != self.D:
+                raise ValueError("base_class should be the iterable object of length D")
+
+        self.base_class_params = base_class_params
+
+    def backfitting(
+        self, optimizers, maxiter=100, verbose=True, tol=1e-5, run_params=dict()
+    ):
+
+        if len(optimizers) != self.D:
+            raise ValueError(
+                "optimizers should be the list of optimizer for each exogenous variable"
+            )
+
+        # initialize with OLS
+        self.betas = jnp.repeat(
+            jnp.linalg.solve(a=self.X.T @ self.X, b=(self.X.T @ self.y).flatten())[
+                jnp.newaxis
+            ],
+            self.N,
+            axis=0,
+        )
+
+        self.pred = self.betas * self.X
+
+        self.RSS = [jnp.sum(jnp.square(self.y - self.pred))]
+        self.SOC = [jnp.inf]
+
+        with tqdm(total=maxiter, disable=not verbose) as pbar:
+            for i in range(maxiter):
+                pbar.update(1)
+                pbar.set_description(
+                    "RSS = {:.2f}, SOC = {:.2f}%".format(
+                        self.RSS[-1], 100 * self.SOC[-1]
+                    )
+                )
+
+                for d in range(self.D):
+                    # local fit
+                    resid = self.y - (
+                        self.pred.sum(axis=1) - (self.betas[:, d] * self.X[:, d])
+                    ).reshape(self.N, 1)
+                    localmodel = self.base_class[d](
+                        y=resid,
+                        X=self.X[:, d].reshape(self.N, 1),
+                        sites=self.sites,
+                        kernel=self.kernel[d],
+                        **self.base_class_params,
+                    )
+
+                    optim = optimizers[d]
+                    optim.run(localmodel, **run_params)
+                    # print(localmodel.kernel.params)
+                    self.kernel[d] = copy.deepcopy(localmodel.kernel)
+
+                    # update coefficients
+                    localmodel.set_betas_inner()
+                    if _JAX_AVAILABLE:
+                        self.betas = self.betas.at[:, d].set(localmodel.betas[:, d])
+                        self.pred = self.pred.at[:, d].set(
+                            self.betas[:, d] * self.X[:, d]
+                        )
+                    else:
+                        self.betas[:, d] = localmodel.betas[:, d]
+                        self.pred[:, d] = self.betas[:, d] * self.X[:, d]
+
+                # score of change
+                self.RSS.append(jnp.sum(jnp.square(self.y - self.pred)))
+                self.SOC.append(jnp.abs(self.RSS[-1] - self.RSS[-2]) / self.RSS[-1])
+
+                if self.SOC[-1] < tol:
+                    break
+
+        return self.RSS

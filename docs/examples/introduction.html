@@ -1,24 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Let’s start GWR bandwidth calibration with sgGWR! &mdash; sgGWR 0.1.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=01f34227"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -94,9 +94,9 @@
            <div itemprop="articleBody">
              
   <section id="Let's-start-GWR-bandwidth-calibration-with-sgGWR!">
-<h1>Let’s start GWR bandwidth calibration with <code class="docutils literal notranslate"><span class="pre">sgGWR</span></code>!<a class="headerlink" href="#Let's-start-GWR-bandwidth-calibration-with-sgGWR!" title="Permalink to this heading"></a></h1>
+<h1>Let’s start GWR bandwidth calibration with <code class="docutils literal notranslate"><span class="pre">sgGWR</span></code>!<a class="headerlink" href="#Let's-start-GWR-bandwidth-calibration-with-sgGWR!" title="Link to this heading"></a></h1>
 <section id="introduction">
-<h2>introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<h2>introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
 <p>Welcome to <strong>sgGWR</strong>! sgGWR (Stochastic Gradient approach for Geographically Weighted Regression) is scalable bandwidth calibration software for GWR.</p>
 <p>Hyperparameter tuning for GWR is time-consuming. <code class="docutils literal notranslate"><span class="pre">sgGWR</span></code> accelerates this process with a stochastic approximation of cross-validation error. So <code class="docutils literal notranslate"><span class="pre">sgGWR</span></code>’s calibration is inaccurate but fast.</p>
 <p>As a first example, let us estimate a regression model for the unknown function with spatial dependency. In practice, we often employ GWR models because we do not know the true functional form.</p>
@@ -127,7 +127,7 @@ An NVIDIA GPU may be present on this machine, but a CUDA-enabled jaxlib is not i
 </pre></div></div>
 </div>
 <section id="set-up-training-data">
-<h3>set up training data<a class="headerlink" href="#set-up-training-data" title="Permalink to this heading"></a></h3>
+<h3>set up training data<a class="headerlink" href="#set-up-training-data" title="Link to this heading"></a></h3>
 <p>In this tutorial, we generate samples from a linear model with spatial coefficients. Beginners do not need to understand the next cell.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
@@ -222,7 +222,7 @@ An NVIDIA GPU may be present on this machine, but a CUDA-enabled jaxlib is not i
 </section>
 </section>
 <section id="setup-model">
-<h2>setup model<a class="headerlink" href="#setup-model" title="Permalink to this heading"></a></h2>
+<h2>setup model<a class="headerlink" href="#setup-model" title="Link to this heading"></a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">sgGWR</span></code> contains two modules and one subpackage as follows:</p>
 <ul class="simple">
 <li><p>sgGWR models (<code class="docutils literal notranslate"><span class="pre">sgGWR.models</span></code>)</p>
@@ -264,7 +264,7 @@ An NVIDIA GPU may be present on this machine, but a CUDA-enabled jaxlib is not i
 </div>
 </section>
 <section id="GWR-without-calibration">
-<h2>GWR without calibration<a class="headerlink" href="#GWR-without-calibration" title="Permalink to this heading"></a></h2>
+<h2>GWR without calibration<a class="headerlink" href="#GWR-without-calibration" title="Link to this heading"></a></h2>
 <p>We have no reason to select 1.0 as a bandwidth parameter, but we can estimate GWR model without calibration.</p>
 <p>To calculate spatially varying coefficients on training samples, run <code class="docutils literal notranslate"><span class="pre">model.set_betas_inner()</span></code> method and check <code class="docutils literal notranslate"><span class="pre">model.betas</span></code>.</p>
 <p>Let us check estimated <code class="docutils literal notranslate"><span class="pre">model.betas</span></code> and true coefficients.</p>
@@ -347,7 +347,7 @@ true coefficients
 <p>This estimated coefficient looks not so good. So, let us calibrate the bandwidth hyperparameter.</p>
 </section>
 <section id="setup-optimizer-and-calibrate-bandwidth">
-<h2>setup optimizer and calibrate bandwidth<a class="headerlink" href="#setup-optimizer-and-calibrate-bandwidth" title="Permalink to this heading"></a></h2>
+<h2>setup optimizer and calibrate bandwidth<a class="headerlink" href="#setup-optimizer-and-calibrate-bandwidth" title="Link to this heading"></a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">sgGWR.optimizers</span></code> is a subpackage of <code class="docutils literal notranslate"><span class="pre">sgGWR</span></code>, and it contains various optimizers. We recommend <code class="docutils literal notranslate"><span class="pre">SGDarmijo</span></code> as a first choice. When we define the optimizer, we need to select initial learning rate with <code class="docutils literal notranslate"><span class="pre">learning_rate0</span></code> argument. Please carefully select this argument to effectively and successfully calibrate bandwidth (You may need some try and error).</p>
 <p>In this setting, 100 samples (=<code class="docutils literal notranslate"><span class="pre">batchsize</span></code>) are randomly selected to approximate cross-validation error in each step during optimization.</p>
 <div class="nbinput docutils container">
@@ -475,9 +475,10 @@ true coefficients
 </div>
 <p><strong>Notes</strong></p>
 <p>The estimation accuracy on <span class="math notranslate nohighlight">\(\beta_1\)</span> looks better than the others. Why? Please check the absolute values of coefficients. It is because that <span class="math notranslate nohighlight">\(\beta_1\)</span> has greater effect on the response variable <span class="math notranslate nohighlight">\(y\)</span>.</p>
+<p>In practice, initial value of bandwidth greatly affects the optimization efficency. If you choose ‘good’ initial value, you can save time to calibrate bandwidth. Please learn how to initialize the bandwidth in the tutorial <strong>How should we initialize the bandwidth parameter before tuning?</strong>.</p>
 </section>
 <section id="%22polish%22-the-bandwidth-(optional)">
-<h2>“polish” the bandwidth (optional)<a class="headerlink" href="#%22polish%22-the-bandwidth-(optional)" title="Permalink to this heading"></a></h2>
+<h2>“polish” the bandwidth (optional)<a class="headerlink" href="#%22polish%22-the-bandwidth-(optional)" title="Link to this heading"></a></h2>
 <p>If you mind the inaccurate optimization, you can improve the bandwidth with non-stochastic optimization method. <code class="docutils literal notranslate"><span class="pre">scipy_optimizer</span></code> is a wrapper of <code class="docutils literal notranslate"><span class="pre">scipy.optimize.minimize</span></code>, and use the <code class="docutils literal notranslate"><span class="pre">model.kernel.params</span></code> as a initial value.</p>
 <p>Hence, you can use stochastic optimization to find a good initial value for accurate calibration.</p>
 <div class="nbinput docutils container">
@@ -590,9 +591,9 @@ true coefficients
 </div>
 </section>
 <section id="Reference">
-<h2>Reference<a class="headerlink" href="#Reference" title="Permalink to this heading"></a></h2>
+<h2>Reference<a class="headerlink" href="#Reference" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>Hayato Nishi, &amp; Yasushi Asami (2023). “Stochastic gradient geographical weighted regression (sgGWR): Scalable bandwidth optimization for geographically weighted regression. International Journal of Geographical Information Science”, Latest Articles. <a class="reference external" href="https://doi.org/10.1080/13658816.2023.2285471">https://doi.org/10.1080/13658816.2023.2285471</a></p></li>
+<li><p>Hayato Nishi, &amp; Yasushi Asami (2024). “Stochastic gradient geographical weighted regression (sgGWR): Scalable bandwidth optimization for geographically weighted regression”. International Journal of Geographical Information Science, Vol. 38, Issue: 2 pp.354-380, <a class="reference external" href="https://doi.org/10.1080/13658816.2023.2285471">https://doi.org/10.1080/13658816.2023.2285471</a></p></li>
 <li><p>Murakami, D., Tsutsumida, N., Yoshida, T., Nakaya, T., &amp; Lu, B. (2021).”Scalable GWR: A Linear-Time Algorithm for Large-Scale Geographically Weighted Regression with Polynomial Kernels”. Annals of the American Association of Geographers, 111(2), 459–480. <a class="reference external" href="https://doi.org/10.1080/24694452.2020.1774350">https://doi.org/10.1080/24694452.2020.1774350</a></p></li>
 </ul>
 </section>
