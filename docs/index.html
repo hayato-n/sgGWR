@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to sgGWR’s documentation! &mdash; sgGWR 0.1.0 documentation</title>
+  <title>Welcome to sgGWR’s documentation! &mdash; sgGWR 0.1.4 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=92fd9be5" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
@@ -15,7 +15,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=01f34227"></script>
+        <script src="_static/documentation_options.js?v=fd825880"></script>
         <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -50,6 +50,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="examples/introduction.html">Let’s start GWR bandwidth calibration with <code class="docutils literal notranslate"><span class="pre">sgGWR</span></code>!</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples/init_bandwidth.html">How should we initialize the bandwidth parameter before tuning?</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Experimental Features:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/mgwr.html">MGWR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/adaptive.html">Adaptive Bandwidth</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Package References:</span></p>
 <ul>
@@ -116,6 +121,13 @@ To install sgGWR with JAX, please execute the following on your terminal.</p>
 <div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Experimental Features:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/mgwr.html">MGWR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/adaptive.html">Adaptive Bandwidth</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Package References:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="sgGWR.html">sgGWR package</a><ul>
@@ -159,6 +171,10 @@ To install sgGWR with JAX, please execute the following on your terminal.</p>
 <li class="toctree-l3"><a class="reference internal" href="sgGWR.optimizers.html#sgGWR.optimizers.existings_numpy.scipy_L_BFGS_B"><code class="docutils literal notranslate"><span class="pre">scipy_L_BFGS_B</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="sgGWR.optimizers.html#module-sgGWR.optimizers.golden">sgGWR.optimizers.golden module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sgGWR.optimizers.html#sgGWR.optimizers.golden.golden_section"><code class="docutils literal notranslate"><span class="pre">golden_section</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="sgGWR.optimizers.html#module-sgGWR.optimizers.second">sgGWR.optimizers.second module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="sgGWR.optimizers.html#sgGWR.optimizers.second.SGN"><code class="docutils literal notranslate"><span class="pre">SGN</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="sgGWR.optimizers.html#sgGWR.optimizers.second.SGN_BFGS"><code class="docutils literal notranslate"><span class="pre">SGN_BFGS</span></code></a></li>
@@ -197,6 +213,7 @@ To install sgGWR with JAX, please execute the following on your terminal.</p>
 <li class="toctree-l3"><a class="reference internal" href="sgGWR.optimizers.html#sgGWR.optimizers.SGN_LM"><code class="docutils literal notranslate"><span class="pre">SGN_LM</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="sgGWR.optimizers.html#sgGWR.optimizers.SVRG"><code class="docutils literal notranslate"><span class="pre">SVRG</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="sgGWR.optimizers.html#sgGWR.optimizers.Yogi"><code class="docutils literal notranslate"><span class="pre">Yogi</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="sgGWR.optimizers.html#sgGWR.optimizers.golden_section"><code class="docutils literal notranslate"><span class="pre">golden_section</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="sgGWR.optimizers.html#sgGWR.optimizers.optax_optimizer"><code class="docutils literal notranslate"><span class="pre">optax_optimizer</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="sgGWR.optimizers.html#sgGWR.optimizers.scipy_L_BFGS_B"><code class="docutils literal notranslate"><span class="pre">scipy_L_BFGS_B</span></code></a></li>
 </ul>

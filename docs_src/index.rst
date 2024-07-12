@@ -51,6 +51,13 @@ Please cite the following article:
    examples/*
 
 .. toctree::
+   :maxdepth: 2
+   :caption: Experimental Features:
+
+   examples/mgwr.ipynb
+   examples/adaptive.ipynb
+
+.. toctree::
    :maxdepth: 3
    :caption: Package References:
 

@@ -7,7 +7,6 @@ try:
         else:
             return w.at[i].set(0.0)
 
-
 except:
     import numpy as jnp
 
@@ -185,6 +184,27 @@ class _KDTreeKernel(_baseKernel):
         return dist, idx
 
 
+class AdaptiveKernel(_baseKernel):
+    """Adaptive Kernel"""
+
+    def __init__(self, params, k_dist=Biweight([1.0])):
+        super().__init__(params)
+
+        if isinstance(k_dist, _scaledKernel):
+            self.k_dist = k_dist._scaledk
+        elif callable(k_dist):
+            self.k_dist = k_dist
+        else:
+            raise ValueError("Unknown k_dist")
+
+    def k(self, x1, x2, params):
+        k = int(params[0])
+        d = jnp.linalg.norm(x1 - x2, axis=-1)
+        bw = jnp.partition(d, kth=k - 1)[k - 1] * (1 + 1e-7)
+
+        return self.k_dist(d / bw)
+
+
 class LinearMultiscale(_KDTreeKernel):
     def __init__(
         self,
@@ -226,7 +246,7 @@ class LinearMultiscale(_KDTreeKernel):
 
         p = jnp.arange(1, self.n_poly + 1, dtype=int)
         if len(jnp.array(b)) == 1:
-            b = b ** p
+            b = b**p
         Wp = w0[None] ** (4 / jnp.power(2, p))[:, None]
         return a + jnp.sum(b[:, None] * Wp, axis=0)
 
@@ -396,4 +416,3 @@ class SpectralMixture(_baseKernel):
         c = jnp.cos(2 * jnp.pi * d * mu)
 
         return e, c
-
