@@ -5,6 +5,7 @@ try:
     from .sg import SGD, ASGD, SGDarmijo, Adam, Yogi
     from .vr import SVRG, KatyushaXs, KatyushaXw
     from .second import SGN, SGN_BFGS, SGN_LM
+    from .golden import golden_section
 
     __all__ = [
         "optax_optimizer",
@@ -21,11 +22,13 @@ try:
         "SGN",
         "SGN_BFGS",
         "SGN_LM",
+        "golden_section",
     ]
 
 except:
     from .existings_numpy import scipy_optimizer, scipy_L_BFGS_B
     from .sg_numpy import SGD, ASGD, SGDarmijo
+    from .golden import golden_section
 
     print(
         "JAX is not available. Installing JAX is strongly recommended for performance."
@@ -37,4 +40,5 @@ except:
         "SGDarmijo",
         "scipy_optimzer",
         "scipy_L_BFGS_B",
+        "golden_section",
     ]

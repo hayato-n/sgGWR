@@ -20,6 +20,14 @@ sgGWR.optimizers.existings\_numpy module
    :undoc-members:
    :show-inheritance:
 
+sgGWR.optimizers.golden module
+------------------------------
+
+.. automodule:: sgGWR.optimizers.golden
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 sgGWR.optimizers.second module
 ------------------------------
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Index &mdash; sgGWR 0.1.0 documentation</title>
+  <title>Index &mdash; sgGWR 0.1.4 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=92fd9be5" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
@@ -14,7 +14,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=01f34227"></script>
+        <script src="_static/documentation_options.js?v=fd825880"></script>
         <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -46,6 +46,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="examples/introduction.html">Let’s start GWR bandwidth calibration with <code class="docutils literal notranslate"><span class="pre">sgGWR</span></code>!</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples/init_bandwidth.html">How should we initialize the bandwidth parameter before tuning?</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Experimental Features:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/mgwr.html">MGWR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/adaptive.html">Adaptive Bandwidth</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Package References:</span></p>
 <ul>
@@ -181,12 +186,20 @@
 </li>
       <li><a href="sgGWR.html#sgGWR.models.GWR_Ridge.get_beta">get_beta() (sgGWR.models.GWR_Ridge method)</a>
 </li>
+      <li><a href="sgGWR.optimizers.html#sgGWR.optimizers.golden_section">golden_section (class in sgGWR.optimizers)</a>
+
+      <ul>
+        <li><a href="sgGWR.optimizers.html#sgGWR.optimizers.golden.golden_section">(class in sgGWR.optimizers.golden)</a>
+</li>
+      </ul></li>
       <li><a href="sgGWR.html#sgGWR.models.GWR.grad_params_aicc">grad_params_aicc() (sgGWR.models.GWR method)</a>
 
       <ul>
         <li><a href="sgGWR.html#sgGWR.models.GWR_Ridge.grad_params_aicc">(sgGWR.models.GWR_Ridge method)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="sgGWR.html#sgGWR.models.GWR.grad_params_loocv">grad_params_loocv() (sgGWR.models.GWR method)</a>
 
       <ul>
@@ -195,8 +208,6 @@
         <li><a href="sgGWR.html#sgGWR.models.ScaGWR.grad_params_loocv">(sgGWR.models.ScaGWR method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="sgGWR.html#sgGWR.models.GWR_Ridge.grad_penalty_aicc">grad_penalty_aicc() (sgGWR.models.GWR_Ridge method)</a>
 </li>
       <li><a href="sgGWR.html#sgGWR.models.GWR_Ridge.grad_penalty_loocv">grad_penalty_loocv() (sgGWR.models.GWR_Ridge method)</a>
@@ -291,6 +302,8 @@
 </li>
         <li><a href="sgGWR.optimizers.html#module-sgGWR.optimizers.existings_numpy">sgGWR.optimizers.existings_numpy</a>
 </li>
+        <li><a href="sgGWR.optimizers.html#module-sgGWR.optimizers.golden">sgGWR.optimizers.golden</a>
+</li>
         <li><a href="sgGWR.optimizers.html#module-sgGWR.optimizers.second">sgGWR.optimizers.second</a>
 </li>
         <li><a href="sgGWR.optimizers.html#module-sgGWR.optimizers.sg">sgGWR.optimizers.sg</a>
@@ -324,6 +337,10 @@
         <li><a href="sgGWR.optimizers.html#sgGWR.optimizers.existings.scipy_L_BFGS_B.run">(sgGWR.optimizers.existings.scipy_L_BFGS_B method)</a>
 </li>
         <li><a href="sgGWR.optimizers.html#sgGWR.optimizers.existings_numpy.scipy_L_BFGS_B.run">(sgGWR.optimizers.existings_numpy.scipy_L_BFGS_B method)</a>
+</li>
+        <li><a href="sgGWR.optimizers.html#sgGWR.optimizers.golden.golden_section.run">(sgGWR.optimizers.golden.golden_section method)</a>
+</li>
+        <li><a href="sgGWR.optimizers.html#sgGWR.optimizers.golden_section.run">(sgGWR.optimizers.golden_section method)</a>
 </li>
         <li><a href="sgGWR.optimizers.html#sgGWR.optimizers.optax_optimizer.run">(sgGWR.optimizers.optax_optimizer method)</a>
 </li>
@@ -426,6 +443,13 @@
 
       <ul>
         <li><a href="sgGWR.optimizers.html#module-sgGWR.optimizers.existings_numpy">module</a>
+</li>
+      </ul></li>
+      <li>
+    sgGWR.optimizers.golden
+
+      <ul>
+        <li><a href="sgGWR.optimizers.html#module-sgGWR.optimizers.golden">module</a>
 </li>
       </ul></li>
       <li>

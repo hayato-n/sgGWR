@@ -9,7 +9,7 @@
 project = "sgGWR"
 copyright = "2023, Hayato Nishi"
 author = "Hayato Nishi"
-release = "0.1.0"
+release = "0.1.4"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

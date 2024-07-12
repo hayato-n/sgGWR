@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>sgGWR.optimizers package &mdash; sgGWR 0.1.0 documentation</title>
+  <title>sgGWR.optimizers package &mdash; sgGWR 0.1.4 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=92fd9be5" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
@@ -15,7 +15,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=01f34227"></script>
+        <script src="_static/documentation_options.js?v=fd825880"></script>
         <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -47,6 +47,12 @@
               <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="examples/introduction.html">Let’s start GWR bandwidth calibration with <code class="docutils literal notranslate"><span class="pre">sgGWR</span></code>!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/init_bandwidth.html">How should we initialize the bandwidth parameter before tuning?</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Experimental Features:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/mgwr.html">MGWR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/adaptive.html">Adaptive Bandwidth</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Package References:</span></p>
 <ul class="current">
@@ -56,6 +62,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#module-sgGWR.optimizers.existings">sgGWR.optimizers.existings module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#module-sgGWR.optimizers.existings_numpy">sgGWR.optimizers.existings_numpy module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-sgGWR.optimizers.golden">sgGWR.optimizers.golden module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#module-sgGWR.optimizers.second">sgGWR.optimizers.second module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#module-sgGWR.optimizers.sg">sgGWR.optimizers.sg module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#module-sgGWR.optimizers.sg_numpy">sgGWR.optimizers.sg_numpy module</a></li>
@@ -87,6 +94,13 @@
 <li class="toctree-l2"><a class="reference internal" href="#module-sgGWR.optimizers.existings_numpy">sgGWR.optimizers.existings_numpy module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#sgGWR.optimizers.existings_numpy.scipy_L_BFGS_B"><code class="docutils literal notranslate"><span class="pre">scipy_L_BFGS_B</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#sgGWR.optimizers.existings_numpy.scipy_L_BFGS_B.run"><code class="docutils literal notranslate"><span class="pre">scipy_L_BFGS_B.run()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-sgGWR.optimizers.golden">sgGWR.optimizers.golden module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sgGWR.optimizers.golden.golden_section"><code class="docutils literal notranslate"><span class="pre">golden_section</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sgGWR.optimizers.golden.golden_section.run"><code class="docutils literal notranslate"><span class="pre">golden_section.run()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -216,6 +230,10 @@
 <li class="toctree-l4"><a class="reference internal" href="#sgGWR.optimizers.Yogi.step"><code class="docutils literal notranslate"><span class="pre">Yogi.step()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#sgGWR.optimizers.golden_section"><code class="docutils literal notranslate"><span class="pre">golden_section</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sgGWR.optimizers.golden_section.run"><code class="docutils literal notranslate"><span class="pre">golden_section.run()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#sgGWR.optimizers.optax_optimizer"><code class="docutils literal notranslate"><span class="pre">optax_optimizer</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#sgGWR.optimizers.optax_optimizer.run"><code class="docutils literal notranslate"><span class="pre">optax_optimizer.run()</span></code></a></li>
 </ul>
@@ -300,6 +318,21 @@ see:  <a class="reference external" href="https://github.com/cran/scgwr/blob/mas
 <dl class="py method">
 <dt class="sig sig-object py" id="sgGWR.optimizers.existings_numpy.scipy_L_BFGS_B.run">
 <span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diff_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'manual'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs_minimize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.optimizers.existings_numpy.scipy_L_BFGS_B.run" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-sgGWR.optimizers.golden">
+<span id="sggwr-optimizers-golden-module"></span><h2>sgGWR.optimizers.golden module<a class="headerlink" href="#module-sgGWR.optimizers.golden" title="Link to this heading"></a></h2>
+<p>Golden Section Search for adaptive bandwidth</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="sgGWR.optimizers.golden.golden_section">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sgGWR.optimizers.golden.</span></span><span class="sig-name descname"><span class="pre">golden_section</span></span><a class="headerlink" href="#sgGWR.optimizers.golden.golden_section" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sgGWR.optimizers.golden.golden_section.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bracket</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aicc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.optimizers.golden.golden_section.run" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -515,7 +548,7 @@ Keynote, Invited and Contributed Papers, 177–186. <a class="reference external
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sgGWR.optimizers.sg_numpy.SGD.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxiter=1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batchsize=100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng=Generator(PCG64)</span> <span class="pre">at</span> <span class="pre">0x7F729E301000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol=0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_iter_no_change=100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose=True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.optimizers.sg_numpy.SGD.run" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxiter=1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batchsize=100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng=Generator(PCG64)</span> <span class="pre">at</span> <span class="pre">0x7F2794622960</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol=0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_iter_no_change=100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose=True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.optimizers.sg_numpy.SGD.run" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -823,6 +856,17 @@ Katyusha X: Practical Momentum Method for Stochastic Sum-of-Nonconvex Optimizati
 <dl class="py method">
 <dt class="sig sig-object py" id="sgGWR.optimizers.Yogi.step">
 <span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_and_g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.optimizers.Yogi.step" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sgGWR.optimizers.golden_section">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sgGWR.optimizers.</span></span><span class="sig-name descname"><span class="pre">golden_section</span></span><a class="headerlink" href="#sgGWR.optimizers.golden_section" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sgGWR.optimizers.golden_section.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bracket</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aicc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.optimizers.golden_section.run" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
