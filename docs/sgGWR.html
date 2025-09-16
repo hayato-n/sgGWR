@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>sgGWR package &mdash; sgGWR 0.1.4 documentation</title>
+  <title>sgGWR package &mdash; sgGWR 0.1.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=92fd9be5" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
@@ -15,7 +15,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=fd825880"></script>
+        <script src="_static/documentation_options.js?v=59fadc99"></script>
         <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -64,6 +64,10 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-sgGWR.kernels">sgGWR.kernels module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sgGWR.kernels.AdaptiveKernel"><code class="docutils literal notranslate"><span class="pre">AdaptiveKernel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sgGWR.kernels.AdaptiveKernel.k"><code class="docutils literal notranslate"><span class="pre">AdaptiveKernel.k()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#sgGWR.kernels.Biweight"><code class="docutils literal notranslate"><span class="pre">Biweight</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#sgGWR.kernels.Epanechnikov"><code class="docutils literal notranslate"><span class="pre">Epanechnikov</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#sgGWR.kernels.Exponential"><code class="docutils literal notranslate"><span class="pre">Exponential</span></code></a></li>
@@ -112,6 +116,23 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#sgGWR.models.MGWR"><code class="docutils literal notranslate"><span class="pre">MGWR</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#sgGWR.models.MGWR.backfitting"><code class="docutils literal notranslate"><span class="pre">MGWR.backfitting()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sgGWR.models.MGWR.set_betas_inner"><code class="docutils literal notranslate"><span class="pre">MGWR.set_betas_inner()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#sgGWR.models.OLS"><code class="docutils literal notranslate"><span class="pre">OLS</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sgGWR.models.OLS.AICc"><code class="docutils literal notranslate"><span class="pre">OLS.AICc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sgGWR.models.OLS.fit"><code class="docutils literal notranslate"><span class="pre">OLS.fit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sgGWR.models.OLS.loocv_loss"><code class="docutils literal notranslate"><span class="pre">OLS.loocv_loss()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sgGWR.models.OLS.setInferenceStats"><code class="docutils literal notranslate"><span class="pre">OLS.setInferenceStats()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#sgGWR.models.Ridge"><code class="docutils literal notranslate"><span class="pre">Ridge</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sgGWR.models.Ridge.AICc"><code class="docutils literal notranslate"><span class="pre">Ridge.AICc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sgGWR.models.Ridge.fit"><code class="docutils literal notranslate"><span class="pre">Ridge.fit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sgGWR.models.Ridge.get_beta"><code class="docutils literal notranslate"><span class="pre">Ridge.get_beta()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sgGWR.models.Ridge.loocv_loss"><code class="docutils literal notranslate"><span class="pre">Ridge.loocv_loss()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sgGWR.models.Ridge.setInferenceStats"><code class="docutils literal notranslate"><span class="pre">Ridge.setInferenceStats()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sgGWR.models.Ridge.set_betas_inner"><code class="docutils literal notranslate"><span class="pre">Ridge.set_betas_inner()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#sgGWR.models.ScaGWR"><code class="docutils literal notranslate"><span class="pre">ScaGWR</span></code></a><ul>
@@ -333,26 +354,38 @@
 <section id="module-sgGWR.kernels">
 <span id="sggwr-kernels-module"></span><h2>sgGWR.kernels module<a class="headerlink" href="#module-sgGWR.kernels" title="Link to this heading"></a></h2>
 <dl class="py class">
+<dt class="sig sig-object py" id="sgGWR.kernels.AdaptiveKernel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sgGWR.kernels.</span></span><span class="sig-name descname"><span class="pre">AdaptiveKernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_dist=&lt;sgGWR.kernels.Biweight</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.kernels.AdaptiveKernel" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_baseKernel</span></code></p>
+<p>Adaptive Kernel</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sgGWR.kernels.AdaptiveKernel.k">
+<span class="sig-name descname"><span class="pre">k</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.kernels.AdaptiveKernel.k" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="sgGWR.kernels.Biweight">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sgGWR.kernels.</span></span><span class="sig-name descname"><span class="pre">Biweight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.kernels.Biweight" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sgGWR.kernels.</span></span><span class="sig-name descname"><span class="pre">Biweight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scaling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.kernels.Biweight" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_scaledKernel</span></code></p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="sgGWR.kernels.Epanechnikov">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sgGWR.kernels.</span></span><span class="sig-name descname"><span class="pre">Epanechnikov</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.kernels.Epanechnikov" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sgGWR.kernels.</span></span><span class="sig-name descname"><span class="pre">Epanechnikov</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scaling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.kernels.Epanechnikov" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_scaledKernel</span></code></p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="sgGWR.kernels.Exponential">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sgGWR.kernels.</span></span><span class="sig-name descname"><span class="pre">Exponential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.kernels.Exponential" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sgGWR.kernels.</span></span><span class="sig-name descname"><span class="pre">Exponential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scaling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.kernels.Exponential" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_scaledKernel</span></code></p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="sgGWR.kernels.Gaussian">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sgGWR.kernels.</span></span><span class="sig-name descname"><span class="pre">Gaussian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.kernels.Gaussian" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sgGWR.kernels.</span></span><span class="sig-name descname"><span class="pre">Gaussian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scaling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.kernels.Gaussian" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_scaledKernel</span></code></p>
 </dd></dl>
 
@@ -374,37 +407,37 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="sgGWR.kernels.Triangular">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sgGWR.kernels.</span></span><span class="sig-name descname"><span class="pre">Triangular</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.kernels.Triangular" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sgGWR.kernels.</span></span><span class="sig-name descname"><span class="pre">Triangular</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scaling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.kernels.Triangular" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_scaledKernel</span></code></p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="sgGWR.kernels.stBiweight">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sgGWR.kernels.</span></span><span class="sig-name descname"><span class="pre">stBiweight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.kernels.stBiweight" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sgGWR.kernels.</span></span><span class="sig-name descname"><span class="pre">stBiweight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scaling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.kernels.stBiweight" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_scaledSTKernel</span></code></p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="sgGWR.kernels.stEpanechnikov">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sgGWR.kernels.</span></span><span class="sig-name descname"><span class="pre">stEpanechnikov</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.kernels.stEpanechnikov" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sgGWR.kernels.</span></span><span class="sig-name descname"><span class="pre">stEpanechnikov</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scaling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.kernels.stEpanechnikov" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_scaledSTKernel</span></code></p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="sgGWR.kernels.stExponential">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sgGWR.kernels.</span></span><span class="sig-name descname"><span class="pre">stExponential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.kernels.stExponential" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sgGWR.kernels.</span></span><span class="sig-name descname"><span class="pre">stExponential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scaling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.kernels.stExponential" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_scaledSTKernel</span></code></p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="sgGWR.kernels.stGaussian">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sgGWR.kernels.</span></span><span class="sig-name descname"><span class="pre">stGaussian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.kernels.stGaussian" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sgGWR.kernels.</span></span><span class="sig-name descname"><span class="pre">stGaussian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scaling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.kernels.stGaussian" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_scaledSTKernel</span></code></p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="sgGWR.kernels.stTriangular">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sgGWR.kernels.</span></span><span class="sig-name descname"><span class="pre">stTriangular</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.kernels.stTriangular" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sgGWR.kernels.</span></span><span class="sig-name descname"><span class="pre">stTriangular</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scaling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.kernels.stTriangular" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_scaledSTKernel</span></code></p>
 </dd></dl>
 
@@ -547,6 +580,96 @@ International Journal of Geographical Information Science, 33(1), 155–175.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sgGWR.models.MGWR.backfitting">
 <span class="sig-name descname"><span class="pre">backfitting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">optimizers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.models.MGWR.backfitting" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sgGWR.models.MGWR.set_betas_inner">
+<span class="sig-name descname"><span class="pre">set_betas_inner</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.models.MGWR.set_betas_inner" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sgGWR.models.OLS">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sgGWR.models.</span></span><span class="sig-name descname"><span class="pre">OLS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.models.OLS" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sgGWR.models.Ridge" title="sgGWR.models.Ridge"><code class="xref py py-class docutils literal notranslate"><span class="pre">Ridge</span></code></a></p>
+<p>Global OLS (Ordinary Least Squares) regression</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sgGWR.models.OLS.AICc">
+<span class="sig-name descname"><span class="pre">AICc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sigma2_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.models.OLS.AICc" title="Link to this definition"></a></dt>
+<dd><p>Fast Evaluation of AICc</p>
+<p>reference.
+Li, Z., Fotheringham, A. S., Li, W., &amp; Oshan, T. (2019).
+Fast Geographically Weighted Regression (FastGWR):
+a scalable algorithm to investigate spatial process heterogeneity
+in millions of observations.
+International Journal of Geographical Information Science, 33(1), 155–175.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sgGWR.models.OLS.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.models.OLS.fit" title="Link to this definition"></a></dt>
+<dd><p>optimize penalty with scipy.optimize.minimize_scaler function</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sgGWR.models.OLS.loocv_loss">
+<span class="sig-name descname"><span class="pre">loocv_loss</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.models.OLS.loocv_loss" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sgGWR.models.OLS.setInferenceStats">
+<span class="sig-name descname"><span class="pre">setInferenceStats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.models.OLS.setInferenceStats" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sgGWR.models.Ridge">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sgGWR.models.</span></span><span class="sig-name descname"><span class="pre">Ridge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">penalty</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.models.Ridge" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sgGWR.models.GWR_Ridge" title="sgGWR.models.GWR_Ridge"><code class="xref py py-class docutils literal notranslate"><span class="pre">GWR_Ridge</span></code></a></p>
+<p>Global Ridge Regression
+Assuming sample size is greater than number of exogenous variables</p>
+<p>References:
+Hastie, T., 2020.
+Ridge Regularizaton: an Essential Concept in Data Science.
+Technometrics 62, 426–433. <a class="reference external" href="https://doi.org/10.48550/arxiv.2006.00371">https://doi.org/10.48550/arxiv.2006.00371</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sgGWR.models.Ridge.AICc">
+<span class="sig-name descname"><span class="pre">AICc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">penalty</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma2_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.models.Ridge.AICc" title="Link to this definition"></a></dt>
+<dd><p>Fast Evaluation of AICc</p>
+<p>reference.
+Li, Z., Fotheringham, A. S., Li, W., &amp; Oshan, T. (2019).
+Fast Geographically Weighted Regression (FastGWR):
+a scalable algorithm to investigate spatial process heterogeneity
+in millions of observations.
+International Journal of Geographical Information Science, 33(1), 155–175.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sgGWR.models.Ridge.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">aicc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma2_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optim_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.models.Ridge.fit" title="Link to this definition"></a></dt>
+<dd><p>optimize penalty with scipy.optimize.minimize_scaler function</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sgGWR.models.Ridge.get_beta">
+<span class="sig-name descname"><span class="pre">get_beta</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.models.Ridge.get_beta" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sgGWR.models.Ridge.loocv_loss">
+<span class="sig-name descname"><span class="pre">loocv_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">penalty</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.models.Ridge.loocv_loss" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sgGWR.models.Ridge.setInferenceStats">
+<span class="sig-name descname"><span class="pre">setInferenceStats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.models.Ridge.setInferenceStats" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sgGWR.models.Ridge.set_betas_inner">
+<span class="sig-name descname"><span class="pre">set_betas_inner</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sgGWR.models.Ridge.set_betas_inner" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>

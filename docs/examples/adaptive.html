@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Adaptive Bandwidth &mdash; sgGWR 0.1.4 documentation</title>
+  <title>Adaptive Bandwidth &mdash; sgGWR 0.1.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=92fd9be5" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
@@ -16,7 +16,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=fd825880"></script>
+        <script src="../_static/documentation_options.js?v=59fadc99"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -91,7 +91,7 @@
   <section id="Adaptive-Bandwidth">
 <h1>Adaptive Bandwidth<a class="headerlink" href="#Adaptive-Bandwidth" title="Link to this heading"></a></h1>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -100,6 +100,7 @@
 <span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">random</span>
 
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.colors</span> <span class="k">as</span> <span class="nn">mcolors</span>
 
 <span class="kn">import</span> <span class="nn">sgGWR</span>
 </pre></div>
@@ -114,7 +115,7 @@ An NVIDIA GPU may be present on this machine, but a CUDA-enabled jaxlib is not i
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># spatial coefficient from</span>
@@ -140,6 +141,7 @@ An NVIDIA GPU may be present on this machine, but a CUDA-enabled jaxlib is not i
 <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">subplot_kw</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;aspect&quot;</span><span class="p">:</span> <span class="s2">&quot;equal&quot;</span><span class="p">},</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 
 <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="c1"># cnorm = mcolors.Normalize(vmin=beta[:, d].min()-0.1, vmax=beta[:, d].max()+0.1)</span>
     <span class="n">ct</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">d</span><span class="p">]</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">u0</span><span class="p">,</span> <span class="n">v0</span><span class="p">,</span> <span class="n">beta</span><span class="p">[:,</span> <span class="n">d</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">u0</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">v0</span><span class="p">)))</span>
     <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">ct</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">d</span><span class="p">])</span>
 
@@ -175,10 +177,10 @@ An NVIDIA GPU may be present on this machine, but a CUDA-enabled jaxlib is not i
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "a6d0436a694646b280439bb53a990351", "version_major": 2, "version_minor": 0}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "c1183f6fde2648f2aab7269f4f270505", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sites</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
@@ -201,7 +203,7 @@ An NVIDIA GPU may be present on this machine, but a CUDA-enabled jaxlib is not i
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "fb5e537f79594061ad124f15435be267", "version_major": 2, "version_minor": 0}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "046b4dd9d579464791e124c1ff6099e2", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
@@ -211,7 +213,7 @@ An NVIDIA GPU may be present on this machine, but a CUDA-enabled jaxlib is not i
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GWR bandwidth  = &quot;</span><span class="p">,</span> <span class="n">model_gwr</span><span class="o">.</span><span class="n">kernel</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -229,29 +231,35 @@ MGWR bandwidth =  [161, 35, 26]
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">subplot_kw</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;aspect&quot;</span><span class="p">:</span> <span class="s2">&quot;equal&quot;</span><span class="p">},</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
 
+<span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">5.5</span>
 <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
     <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">d</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;true coefficients&quot;</span><span class="p">)</span>
+
+    <span class="n">cnorm</span> <span class="o">=</span> <span class="n">mcolors</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">)</span><span class="c1">#vmin=beta[:, d].min()-0.1, vmax=beta[:, d].max()+0.1)</span>
     <span class="n">ct</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">d</span><span class="p">]</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span>
-        <span class="n">u0</span><span class="p">,</span> <span class="n">v0</span><span class="p">,</span> <span class="n">beta</span><span class="p">[:,</span> <span class="n">d</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">u0</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">v0</span><span class="p">)),</span> <span class="n">vmin</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">5.0</span>
+        <span class="n">u0</span><span class="p">,</span> <span class="n">v0</span><span class="p">,</span> <span class="n">beta</span><span class="p">[:,</span> <span class="n">d</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">u0</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">v0</span><span class="p">)),</span> <span class="n">norm</span><span class="o">=</span><span class="n">cnorm</span><span class="p">,</span><span class="c1">#vmin=1.0, vmax=5.0</span>
     <span class="p">)</span>
-    <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">ct</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">d</span><span class="p">])</span>
+    <span class="n">cbar</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">ct</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">d</span><span class="p">])</span>
+    <span class="n">cbar</span><span class="o">.</span><span class="n">mappable</span><span class="o">.</span><span class="n">set_clim</span><span class="p">(</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="p">)</span>
 
     <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">d</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;GWR coefficients&quot;</span><span class="p">)</span>
     <span class="n">ct</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">d</span><span class="p">]</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span>
-        <span class="n">u0</span><span class="p">,</span> <span class="n">v0</span><span class="p">,</span> <span class="n">model_gwr</span><span class="o">.</span><span class="n">betas</span><span class="p">[:,</span> <span class="n">d</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">u0</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">v0</span><span class="p">)),</span> <span class="n">vmin</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">5.0</span>
+        <span class="n">u0</span><span class="p">,</span> <span class="n">v0</span><span class="p">,</span> <span class="n">model_gwr</span><span class="o">.</span><span class="n">betas</span><span class="p">[:,</span> <span class="n">d</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">u0</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">v0</span><span class="p">)),</span> <span class="n">norm</span><span class="o">=</span><span class="n">cnorm</span><span class="p">,</span><span class="c1">#vmin=1.0, vmax=5.0</span>
     <span class="p">)</span>
-    <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">ct</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">d</span><span class="p">])</span>
+    <span class="n">cbar</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">ct</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">d</span><span class="p">])</span>
+    <span class="n">cbar</span><span class="o">.</span><span class="n">mappable</span><span class="o">.</span><span class="n">set_clim</span><span class="p">(</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="p">)</span>
 
     <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">d</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;MGWR coefficients&quot;</span><span class="p">)</span>
     <span class="n">ct</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">d</span><span class="p">]</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span>
-        <span class="n">u0</span><span class="p">,</span> <span class="n">v0</span><span class="p">,</span> <span class="n">model_mgwr</span><span class="o">.</span><span class="n">betas</span><span class="p">[:,</span> <span class="n">d</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">u0</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">v0</span><span class="p">)),</span> <span class="n">vmin</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">5.0</span>
+        <span class="n">u0</span><span class="p">,</span> <span class="n">v0</span><span class="p">,</span> <span class="n">model_mgwr</span><span class="o">.</span><span class="n">betas</span><span class="p">[:,</span> <span class="n">d</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">u0</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">v0</span><span class="p">)),</span> <span class="n">norm</span><span class="o">=</span><span class="n">cnorm</span><span class="p">,</span><span class="c1">#vmin=1.0, vmax=5.0</span>
     <span class="p">)</span>
-    <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">ct</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">d</span><span class="p">])</span>
+    <span class="n">cbar</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">ct</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">d</span><span class="p">])</span>
+    <span class="n">cbar</span><span class="o">.</span><span class="n">mappable</span><span class="o">.</span><span class="n">set_clim</span><span class="p">(</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="p">)</span>
 
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -266,7 +274,7 @@ MGWR bandwidth =  [161, 35, 26]
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
@@ -287,6 +295,14 @@ MGWR bandwidth =  [161, 35, 26]
 </div>
 <div class="output_area docutils container">
 <img alt="../_images/examples_adaptive_7_0.png" src="../_images/examples_adaptive_7_0.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
 </div>
 </div>
 <div class="nbinput nblast docutils container">
