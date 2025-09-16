@@ -33,6 +33,7 @@ __all__ = [
     "Triangular",
     "Biweight",
     "LinearMultiscale",
+    "AdaptiveKernel",
     "stGaussian",
     "stExponential",
     "stEpanechnikov",
@@ -82,8 +83,17 @@ class _baseKernel(object):
 
 
 class _scaledKernel(_baseKernel):
+    def __init__(self, params, scaling=None):
+        self.params = params
+        if scaling is None:
+            self.scaling = lambda x1: 1.0
+        elif callable(scaling):
+            self.scaling = scaling
+        else:
+            raise ValueError("scaling must be callable")
+
     def _dist(self, x1, x2, params):
-        d = jnp.linalg.norm(x1 - x2, axis=-1)
+        d = jnp.linalg.norm(x1 - x2, axis=-1) * self.scaling(x1)
         return params[0] * d, d
 
     def _scaledk(self, d):
@@ -97,7 +107,11 @@ class _scaledKernel(_baseKernel):
         return self._scaledk(scaled)
 
     def dk(self, x1, x2, params):
-        scaled, d = self._dist(x1, x2, params)
+        scaled, d = self._dist(
+            x1,
+            x2,
+            params,
+        )
         return (self._scaleddk(scaled) * d).reshape(-1, 1)
 
     def _scaled_k_inv(self, k):

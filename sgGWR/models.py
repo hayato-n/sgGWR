@@ -21,7 +21,7 @@ except:
 
 from . import kernels
 
-from scipy import stats
+from scipy import stats, optimize
 from tqdm.auto import tqdm
 import copy
 
@@ -112,7 +112,7 @@ class GWR_Ridge(object):
 
     def loocv_GN(self, params, penalty, idx=None):
         def f_g(i):
-            return value_and_grad(self._loocv_pred, argnums=[1, 2])(
+            return value_and_grad(self._loocv_, argnums=[1, 2])(
                 i, jnp.array(params), penalty
             )
 
@@ -639,3 +639,128 @@ class MGWR(GWR_Ridge):
                     break
 
         return self.RSS
+
+    def set_betas_inner(self):
+        raise NotImplementedError()
+        # return super().set_betas_inner()
+
+
+class Ridge(GWR_Ridge):
+    """Global Ridge Regression
+    Assuming sample size is greater than number of exogenous variables
+
+    References:
+    Hastie, T., 2020.
+    Ridge Regularizaton: an Essential Concept in Data Science.
+    Technometrics 62, 426–433. https://doi.org/10.48550/arxiv.2006.00371
+
+    """
+
+    def __init__(self, y, X, penalty=0.01):
+        self.y = jnp.array(y).reshape(-1, 1)
+        self.N = len(self.y)
+        self.X = jnp.array(X).reshape(self.N, -1)
+        self.D = self.X.shape[1]
+
+        assert penalty >= 0
+        self.penalty = penalty
+
+        # SVD method (see Hastie (2020))
+        self.U, self.s, self.V = jnp.linalg.svd(
+            self.X, full_matrices=True, compute_uv=True
+        )
+        self.V = self.V.T
+
+    def set_betas_inner(self):
+
+        self.beta = self.get_beta()
+
+        self.betas = jnp.repeat(self.beta, repeats=self.N, axis=1).T
+
+    def get_beta(self):
+        return self._get_beta(penalty=self.penalty)
+
+    def _get_beta(self, penalty):
+
+        return self.V @ (
+            jnp.maximum(self.s / (self.s**2 + penalty), 0.0).reshape(self.D, 1)
+            * (self.U.T[: self.D] @ self.y)
+        )
+
+    def loocv_loss(self, penalty=None):
+        if penalty is None:
+            penalty = self.penalty
+        r = self._diag_hat(penalty)
+        resid = (self.y - self.X @ self._get_beta(penalty)).flatten()
+        return jnp.sum(resid**2 / (1 - r) ** 2) / self.N
+
+    def _diag_hat(self, penalty):
+        return jnp.diag(self._hat(penalty))
+
+    def _hat(self, penalty):
+        shrinkage = self.s**2 / (self.s**2 + penalty)
+        U = self.U[:, : self.D]
+        return U * shrinkage.reshape((1, self.D)) @ U.T
+
+    def AICc(self, penalty=None, sigma2_type=0):
+        if penalty is None:
+            penalty = self.penalty
+
+        r = self._diag_hat(penalty)
+        enp = jnp.sum(r)
+        beta = self._get_beta(penalty)
+        rss = jnp.sum(jnp.square(self.y - self.X @ beta))
+
+        if sigma2_type != 1:
+            # ML estimator (which is the same setting to mgwr package in Python)
+            # It is consistent to the original paper of AICc
+            # (Hurvich, Simonoff, Tsai 1998, J. R. Statist. Soc. B)
+            sigma2 = rss / self.N
+        else:
+            # unbiased estimator (Li et al. 2019)
+            sigma2 = rss / (self.N - enp)
+
+        aicc = self.N * (
+            jnp.log(sigma2) + jnp.log(2 * jnp.pi) + (self.N + enp) / (self.N - 2 - enp)
+        )
+
+        return aicc
+
+    def fit(self, aicc=False, sigma2_type=0, optim_options=dict()):
+        """optimize penalty with scipy.optimize.minimize_scaler function"""
+        if aicc:
+            fun = lambda x: self.AICc(x, sigma2_type)
+        else:
+            fun = self.loocv_loss
+
+        if "bounds" not in optim_options.keys():
+            res = optimize.minimize_scalar(
+                fun, bounds=(0.0, self.s.max() * 100), **optim_options
+            )
+        else:
+            res = optimize.minimize_scalar(fun, **optim_options)
+
+        self.penalty = res.x
+        return res
+
+    def setInferenceStats(self, alpha=0.05):
+        return NotImplementedError()
+
+
+class OLS(Ridge):
+    """Global OLS (Ordinary Least Squares) regression"""
+
+    def __init__(self, y, X):
+        super().__init__(y, X, penalty=0.0)
+
+    def loocv_loss(self):
+        return super().loocv_loss(0.0)
+
+    def AICc(self, sigma2_type=0):
+        return super().AICc(penalty=0.0, sigma2_type=sigma2_type)
+
+    def fit(self):
+        return ValueError()
+
+    def setInferenceStats(self, alpha=0.05):
+        return NotImplementedError()

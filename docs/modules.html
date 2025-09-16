@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>sgGWR &mdash; sgGWR 0.1.4 documentation</title>
+  <title>sgGWR &mdash; sgGWR 0.1.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=92fd9be5" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
@@ -15,7 +15,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=fd825880"></script>
+        <script src="_static/documentation_options.js?v=59fadc99"></script>
         <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -105,6 +105,10 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="sgGWR.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sgGWR.html#module-sgGWR.kernels">sgGWR.kernels module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sgGWR.html#sgGWR.kernels.AdaptiveKernel"><code class="docutils literal notranslate"><span class="pre">AdaptiveKernel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sgGWR.html#sgGWR.kernels.AdaptiveKernel.k"><code class="docutils literal notranslate"><span class="pre">AdaptiveKernel.k()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="sgGWR.html#sgGWR.kernels.Biweight"><code class="docutils literal notranslate"><span class="pre">Biweight</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="sgGWR.html#sgGWR.kernels.Epanechnikov"><code class="docutils literal notranslate"><span class="pre">Epanechnikov</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="sgGWR.html#sgGWR.kernels.Exponential"><code class="docutils literal notranslate"><span class="pre">Exponential</span></code></a></li>
@@ -153,6 +157,23 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="sgGWR.html#sgGWR.models.MGWR"><code class="docutils literal notranslate"><span class="pre">MGWR</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="sgGWR.html#sgGWR.models.MGWR.backfitting"><code class="docutils literal notranslate"><span class="pre">MGWR.backfitting()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sgGWR.html#sgGWR.models.MGWR.set_betas_inner"><code class="docutils literal notranslate"><span class="pre">MGWR.set_betas_inner()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sgGWR.html#sgGWR.models.OLS"><code class="docutils literal notranslate"><span class="pre">OLS</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sgGWR.html#sgGWR.models.OLS.AICc"><code class="docutils literal notranslate"><span class="pre">OLS.AICc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sgGWR.html#sgGWR.models.OLS.fit"><code class="docutils literal notranslate"><span class="pre">OLS.fit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sgGWR.html#sgGWR.models.OLS.loocv_loss"><code class="docutils literal notranslate"><span class="pre">OLS.loocv_loss()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sgGWR.html#sgGWR.models.OLS.setInferenceStats"><code class="docutils literal notranslate"><span class="pre">OLS.setInferenceStats()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sgGWR.html#sgGWR.models.Ridge"><code class="docutils literal notranslate"><span class="pre">Ridge</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sgGWR.html#sgGWR.models.Ridge.AICc"><code class="docutils literal notranslate"><span class="pre">Ridge.AICc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sgGWR.html#sgGWR.models.Ridge.fit"><code class="docutils literal notranslate"><span class="pre">Ridge.fit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sgGWR.html#sgGWR.models.Ridge.get_beta"><code class="docutils literal notranslate"><span class="pre">Ridge.get_beta()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sgGWR.html#sgGWR.models.Ridge.loocv_loss"><code class="docutils literal notranslate"><span class="pre">Ridge.loocv_loss()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sgGWR.html#sgGWR.models.Ridge.setInferenceStats"><code class="docutils literal notranslate"><span class="pre">Ridge.setInferenceStats()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sgGWR.html#sgGWR.models.Ridge.set_betas_inner"><code class="docutils literal notranslate"><span class="pre">Ridge.set_betas_inner()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="sgGWR.html#sgGWR.models.ScaGWR"><code class="docutils literal notranslate"><span class="pre">ScaGWR</span></code></a><ul>

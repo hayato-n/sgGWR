@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Index &mdash; sgGWR 0.1.4 documentation</title>
+  <title>Index &mdash; sgGWR 0.1.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=92fd9be5" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
@@ -14,7 +14,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=fd825880"></script>
+        <script src="_static/documentation_options.js?v=59fadc99"></script>
         <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -89,6 +89,7 @@
  | <a href="#B"><strong>B</strong></a>
  | <a href="#D"><strong>D</strong></a>
  | <a href="#E"><strong>E</strong></a>
+ | <a href="#F"><strong>F</strong></a>
  | <a href="#G"><strong>G</strong></a>
  | <a href="#K"><strong>K</strong></a>
  | <a href="#L"><strong>L</strong></a>
@@ -110,8 +111,16 @@
         <li><a href="sgGWR.optimizers.html#sgGWR.optimizers.sg.Adam">(class in sgGWR.optimizers.sg)</a>
 </li>
       </ul></li>
-      <li><a href="sgGWR.html#sgGWR.models.GWR_Ridge.AICc">AICc() (sgGWR.models.GWR_Ridge method)</a>
+      <li><a href="sgGWR.html#sgGWR.kernels.AdaptiveKernel">AdaptiveKernel (class in sgGWR.kernels)</a>
 </li>
+      <li><a href="sgGWR.html#sgGWR.models.GWR_Ridge.AICc">AICc() (sgGWR.models.GWR_Ridge method)</a>
+
+      <ul>
+        <li><a href="sgGWR.html#sgGWR.models.OLS.AICc">(sgGWR.models.OLS method)</a>
+</li>
+        <li><a href="sgGWR.html#sgGWR.models.Ridge.AICc">(sgGWR.models.Ridge method)</a>
+</li>
+      </ul></li>
       <li><a href="sgGWR.optimizers.html#sgGWR.optimizers.sg.SGDarmijo.armijo_cond">armijo_cond() (sgGWR.optimizers.sg.SGDarmijo method)</a>
 
       <ul>
@@ -179,13 +188,29 @@
   </ul></td>
 </tr></table>
 
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="sgGWR.html#sgGWR.models.OLS.fit">fit() (sgGWR.models.OLS method)</a>
+
+      <ul>
+        <li><a href="sgGWR.html#sgGWR.models.Ridge.fit">(sgGWR.models.Ridge method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
 <h2 id="G">G</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="sgGWR.html#sgGWR.kernels.Gaussian">Gaussian (class in sgGWR.kernels)</a>
 </li>
       <li><a href="sgGWR.html#sgGWR.models.GWR_Ridge.get_beta">get_beta() (sgGWR.models.GWR_Ridge method)</a>
+
+      <ul>
+        <li><a href="sgGWR.html#sgGWR.models.Ridge.get_beta">(sgGWR.models.Ridge method)</a>
 </li>
+      </ul></li>
       <li><a href="sgGWR.optimizers.html#sgGWR.optimizers.golden_section">golden_section (class in sgGWR.optimizers)</a>
 
       <ul>
@@ -222,8 +247,12 @@
 <h2 id="K">K</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="sgGWR.html#sgGWR.kernels.LinearMultiscale.k">k() (sgGWR.kernels.LinearMultiscale method)</a>
+      <li><a href="sgGWR.html#sgGWR.kernels.AdaptiveKernel.k">k() (sgGWR.kernels.AdaptiveKernel method)</a>
+
+      <ul>
+        <li><a href="sgGWR.html#sgGWR.kernels.LinearMultiscale.k">(sgGWR.kernels.LinearMultiscale method)</a>
 </li>
+      </ul></li>
       <li><a href="sgGWR.optimizers.html#sgGWR.optimizers.KatyushaXs">KatyushaXs (class in sgGWR.optimizers)</a>
 
       <ul>
@@ -256,6 +285,10 @@
 
       <ul>
         <li><a href="sgGWR.html#sgGWR.models.GWR_Ridge.loocv_loss">(sgGWR.models.GWR_Ridge method)</a>
+</li>
+        <li><a href="sgGWR.html#sgGWR.models.OLS.loocv_loss">(sgGWR.models.OLS method)</a>
+</li>
+        <li><a href="sgGWR.html#sgGWR.models.Ridge.loocv_loss">(sgGWR.models.Ridge method)</a>
 </li>
       </ul></li>
       <li><a href="sgGWR.optimizers.html#sgGWR.optimizers.ASGD.lr_schedule">lr_schedule() (sgGWR.optimizers.ASGD method)</a>
@@ -319,6 +352,10 @@
 <h2 id="O">O</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="sgGWR.html#sgGWR.models.OLS">OLS (class in sgGWR.models)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="sgGWR.optimizers.html#sgGWR.optimizers.optax_optimizer">optax_optimizer (class in sgGWR.optimizers)</a>
 
       <ul>
@@ -331,6 +368,8 @@
 <h2 id="R">R</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="sgGWR.html#sgGWR.models.Ridge">Ridge (class in sgGWR.models)</a>
+</li>
       <li><a href="sgGWR.optimizers.html#sgGWR.optimizers.existings.optax_optimizer.run">run() (sgGWR.optimizers.existings.optax_optimizer method)</a>
 
       <ul>
@@ -378,7 +417,13 @@
 </li>
       </ul></li>
       <li><a href="sgGWR.html#sgGWR.models.GWR_Ridge.set_betas_inner">set_betas_inner() (sgGWR.models.GWR_Ridge method)</a>
+
+      <ul>
+        <li><a href="sgGWR.html#sgGWR.models.MGWR.set_betas_inner">(sgGWR.models.MGWR method)</a>
 </li>
+        <li><a href="sgGWR.html#sgGWR.models.Ridge.set_betas_inner">(sgGWR.models.Ridge method)</a>
+</li>
+      </ul></li>
       <li><a href="sgGWR.html#sgGWR.models.GWR.set_params">set_params() (sgGWR.models.GWR method)</a>
 
       <ul>
@@ -386,7 +431,13 @@
 </li>
       </ul></li>
       <li><a href="sgGWR.html#sgGWR.models.GWR_Ridge.setInferenceStats">setInferenceStats() (sgGWR.models.GWR_Ridge method)</a>
+
+      <ul>
+        <li><a href="sgGWR.html#sgGWR.models.OLS.setInferenceStats">(sgGWR.models.OLS method)</a>
 </li>
+        <li><a href="sgGWR.html#sgGWR.models.Ridge.setInferenceStats">(sgGWR.models.Ridge method)</a>
+</li>
+      </ul></li>
       <li><a href="sgGWR.optimizers.html#sgGWR.optimizers.SGD">SGD (class in sgGWR.optimizers)</a>
 
       <ul>
@@ -473,6 +524,8 @@
         <li><a href="sgGWR.optimizers.html#module-sgGWR.optimizers.sg_numpy">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     sgGWR.optimizers.vr
 
@@ -480,8 +533,6 @@
         <li><a href="sgGWR.optimizers.html#module-sgGWR.optimizers.vr">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="sgGWR.optimizers.html#sgGWR.optimizers.SGN">SGN (class in sgGWR.optimizers)</a>
 
       <ul>
